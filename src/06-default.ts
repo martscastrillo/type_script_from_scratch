@@ -1,3 +1,5 @@
+/* Parametros por defecto en TS
+Ya sabemos que los parametros por defecto pueden ser por defecto agregando un ?: justo como se hace abajo con age */
 export const createProduct = (
     id: string | number,
     isNew: boolean = true,
