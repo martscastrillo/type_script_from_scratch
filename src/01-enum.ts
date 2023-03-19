@@ -5,7 +5,7 @@ enum ROLES {
 }
 
 
-type User = {
+export type User = {
     username:string;
     role: ROLES;
 }
