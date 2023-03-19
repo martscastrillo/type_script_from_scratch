@@ -17,7 +17,7 @@ if (Array.isArray(rtArray)){
 console.log('rtaArray', 'Nico =>', rtArray);
 const rtStr = parseStr(['M','a','r','t','a']);
 // rtStr.toLowerCase();
-if(typeof.rtStr === 'string'){
+if(typeof rtStr === 'string'){
     rtStr.toLowerCase();
 }
 console.log('rtStr', "['M','a','r','t','a'] =>" ,rtStr);
