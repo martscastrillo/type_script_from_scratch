@@ -1,3 +1,6 @@
+/* Parámetros rest
+Los parámetros rest nos permiten enviar la cantidad que queramos de parámetros a una función, casi sin limite.
+ */
 import {User, ROLES } from './01-enum'; 
 
 const currentUser = {
