@@ -1,5 +1,5 @@
 import {Product} from './product.model'
-import { CreateProductDto } from "./product.dto"
+import { CreateProductDto, UpdateProductDto} from "./product.dto"
 import faker from '@faker-js/faker';
 
 const products : Product[] = [];
@@ -20,6 +20,6 @@ export const addProduct = (data: CreateProductDto) : Product => {
     products.push(newProduct);
 }
 
-export const updateProduct = (id: string, changes: Product) => {
+export const updateProduct = (id: string, changes: UpdateProductDto) => {
 
 }
