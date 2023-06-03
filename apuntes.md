@@ -150,3 +150,23 @@ También podrías indicar que deseas aplicar la anterior operación a todos los 
 npx tsc *.ts --target es6 --outDir carpeta_destino
 
 ```
+## Creando un archivo TSConfig.json
+En la terminal, ubicándonos dentro del directorio en el que queremos que se cree el archivo, ejecutemos:
+```
+npx tsc --init
+```
+Nos creará automáticamente el archivo con propiedades básicas activadas:
+Dentro del archivo TSConfig.json podemos ver que tiene muchas propiedades comentadas (desactivadas) y de las cuales solo algunas están activadas.
+
+### Compilación en TypeScript
+
+Nuestro código TypeScript se transpilará según las propiedades indicadas en nuestro archivo `TSConfig.json``:
+```
+npx tsc
+```
+### Compilación en tiempo real
+
+Nos puede resultar tedioso estar ejecutando el comando anterior siempre después de escribir nuestro código. Para evitar esto, podemos hacer que el compilador esté detectando cada cambio que realicemos en nuestros archivos TypeScript y haga la transpilación de inmediato:
+```
+npx tsc --watch
+```
