@@ -72,7 +72,7 @@ El análisis de código estático nos ayudará a detectar fallas en nuestro prog
 
 En la carpeta src del proyecto de curso, vamos a crear un archivo JavaScript llamado demo.js. El código base es el siguiente:
 
-```
+```javascript
 (()=> {
   const myCart = [];
   const products = [];
@@ -183,11 +183,11 @@ Para proyectos de sofware que tienen una gran escalabilidad, esto podría ser fu
 Gracias a TypeScript podemos manejar el tipado de las variables para evitar anomalías en el código.
 
 En JavaScript, para declarar una variable constante lo realizamos así:
-```
+```javascript
 const productPrice = 12;
 ```
 En TypeScript, para el caso anterior, es similar solo que añadimos : y el tipo de dato de la variable, la cual sería number. A esto último se le llama type annotation o anotación de tipo:
-```
+```javascript
 const productPrice: number = 12;
 ```
 ## Tipos inferidos
@@ -196,15 +196,15 @@ TypeScript puede inferir el tipo de dato de una variable a pesar de no haberlo d
 ### Inferencia de tipos
 
 A partir de la inicialización de la variable TypeScript infiere el tipo que será a lo largo del código y este no puede variar. Por ejemplo:
-```
+```javascript
 let myName = "Victoria";
 ```
 Si bien no indicamos el tipo de dato como se haría de esta manera:
-```
+```javascript
 let myName: string = "Victoria";
 ```
 TypeScript infiere que la variable myName será del tipo string y en adelante no podrá tomar un valor que no sea de este tipo de dato.
-```
+```javascript
 myName = 30; 
 //Nos señalará como error pues se le quiere asignar un número a una variable de tipo string.
 ```
@@ -213,7 +213,7 @@ myName = 30;
 TypeScript te indicará como error aquellas variables con el mismo nombre a pesar de estar en archivos distintos. Esto no sucederá en entornos preconfigurados como por ejemplo Angular o React, ya que estos trabajan de forma modular o tienen un alcance (scope) para cada variable.
 
 Si deseas trabajar con los mismos nombres de variables en diferentes archivos, puedes crear una función anónima autoejecutada:
-```
+```javascript
 ( () => {
     let myName = "Victoria";
 })();
@@ -225,13 +225,13 @@ El tipo de dato number se usa para variables que contendrán números positivos,
 ### Operaciones
 
 En JavaScript, una variable de tipo number puede fácilmente ser concatenado con otra de tipo string:
-```
+```javascript
 //JavaScript
 let myNumber = 30;
 myNumber = myNumber + "5"; //El resultado sería '305'
 ``` 
 Sin embargo, esto podría llevar confusiones y errores durante la ejecución del programa, además de estar cambiando el tipo de dato de la variable. Por ello, en TypeScript solo se pueden hacer operaciones numéricas entre números valga la redundancia:
-```
+```javascript
 //TypeScript
 let myNumber: number = 30;
 
@@ -241,7 +241,7 @@ myNumber = myNumber + "10"; //INCORRECTO
 ### Uso de variables sin inicializar
 
 Serán señalados como errores aquellas variables que queramos usar sin haberles dado un valor inicial:
-```
+```javascript
 //TypeScript
 let productInStock: number;
 console.log("Product in stock: " + productInStock);
@@ -251,7 +251,7 @@ Señalar que si no se va a inicializar aún la variable, definir explícitamente
 ### Conversión de números de tipo string a tipo number
 
 Para esto usaremos el método parseInt:
-```
+```javascript
 let discount: number = parseInt("123");
 
 let numeroString: string = "100";
@@ -259,14 +259,14 @@ let nuevoNumero: number;
 nuevoNumero = parseInt(numeroString);
 ```
 Esto funciona si el string tiene solo y exclusivamente números que no empiecen con 0. De lo contrario, el resultado será de tipo NaN (Not a Number):
-```
+```javascript
 //TypeScript
 let numeroPrueba: number = parseInt("palabra");
 console.log(numeroPrueba); //NaN
 Binarios y Hexadecimales
 ```
 TypeScript nos puede indicar error si intentamos definir números binarios que tengan números que no sean 0 o 1 y si declaramos hexadecimales usando valores fuera del rango:
-```
+```javascript
 //**********TypeScript**********
 //Binarios: se definen colocando "0b" al inicio del valor
 let primerBinario = 0b1010; //CORRECTO
@@ -277,7 +277,7 @@ let primerHexa = 0xfff; //CORRECTO
 let segundoHexa = 0xffz; //INCORRECTO. El "z" es inválido
 ```
 En consola, si están correctamente asignados, se hará una conversión a decimal de dichos números:
-```
+```javascript
 let primerHexa = 0xfff;
 console.log(primerHexa); // 4095
 
@@ -287,7 +287,7 @@ console.log(primerBinario); // 10
 ### Consejo
 
 Cuando definas una variable de tipo de dato number, es preferible que el nombre de tipo sea en minúscula. Esto como buena práctica, pues se hará referencia al tipo de dato number y no al objeto Number propio del lenguaje:
-```
+```javascript
 let myNumber: number = 20; // Buena practica.
 let otherNumber: Number = 20; // Mala practica.
 ```
