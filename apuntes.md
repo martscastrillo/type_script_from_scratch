@@ -291,3 +291,6 @@ Cuando definas una variable de tipo de dato number, es preferible que el nombre 
 let myNumber: number = 20; // Buena practica.
 let otherNumber: Number = 20; // Mala practica.
 ```
+## Booleans
+
+
