@@ -292,5 +292,155 @@ let myNumber: number = 20; // Buena practica.
 let otherNumber: Number = 20; // Mala practica.
 ```
 ## Booleans
+Este tipo de dato puede tomar dos valores: true o false.
+```javascript
+let isEnable: boolean = true;
+let isNew = false;
+```
+## Strings
+Este tipo de dato nos permite almacenar una cadena de caracteres.
 
+Podemos definir un string con:
+
+1. Comillas simples:
+```javascript
+let myProduct = 'Soda'; //CORRECTO
+let comillasDobles = 'Puedo "usar" comillas dobles tambien'; //CORRECTO
+let comillaInvalida = 'No puedo 'usar' otra vez una comilla simple'; //INCORRECTO
+``` 
+Se pueden usar comillas dobles dentro, más no otra vez comillas simples.
+
+2. Comillas dobles:
+```javascript
+let myProduct = "Soda"; //CORRECTO
+let comillaSimple = "Puedo 'usar' comilla simple tambien"; //CORRECTO
+let comillaInvalida = "No puedo "usar" otra vez las comillas dobles"; //INCORRECTO
+``` 
+Se puede usar comillas simples dentro, más no otra vez comillas dobles.
+
+3. Usando backticks:
+```javascript
+let myName = `Frank`;
+``` 
+Esta forma de asignar string trae algunas ventajas:
+
+- Declarar valores de múltiples líneas:
+```javascript
+let texto = `
+    Nunca
+    pares
+    de aprender :)
+`;
+``` 
+- Concatenar dentro del mismo string. Para esto es necesario usar este símbolo del dólar seguido de llaves ${} y escribir lo que queremos concatenar dentro de esas llaves:
+```javascript
+let variableTitulo = "TypeScript";
+let summary = `
+    title: ${variableTitulo}
+`;
+``` 
+- También respeta la indentación:
+```javascript
+let html= `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    ...
+  </body>
+</html>
+`;
+``` 
+## Arrays
+Es una colección de datos ordenada. Los definimos de la siguiente manera:
+```javascript
+let prices = [1,2,3,4,5];
+
+/* Método Push para agregar un elemento al final del array */
+prices.push(6);
+console.log(prices); // [1,2,3,4,5,6]
+```
+Para el array prices, TypeScript, de no indicarle explícitamente, va a inferir que este solo contendrá valores del tipo number, por lo que si se quiere agregar un valor string, por ejemplo, nos indicará un error:
+```javascript
+//TypeScript
+prices.push("texto"); //ERROR. Se espera agregar solo números al array.
+```
+Esto debido a que en su inicialización se le asignó un array que solo contenía números.
+
+También nos indicará error si pretendemos hacer operaciones exclusivas de un tipo de dato sobre la de otro tipo:
+```javascript
+let meses = ["Mayo","Junio","Julio"];
+meses.map( item => item * 2 ); //ERROR. Se pretende realizar una multiplicación usando strings.
+```
+### Tipado de arrays en TypeScript
+
+Lo puedes definir así:
+
+Indicar explícitamente los tipos de datos que almacenará el array:
+```javascript
+let prices: (number | string)[] = ["hola",2,4,6,"mundo"];
+let otherPrices: (boolean | number)[];
+```
+Para este caso, a menos que la variable sea una constante, no es necesario que inicialices la variable, pues ya le indicaste el tipo de dato.
+
+En la inicialización de la variable, colocar datos con el tipo de dato que quieres que soporte tu array en adelante para que lo pueda inferir TypeScript:
+```javascript
+//TypeScript
+let prices = ["hola",2,4,6,"mundo"];
+// "hola", "mundo" => string
+// 2,4,6 => number
+```
+Dejamos claro que queremos que soporte los tipos de dato string y number.
+## Any
+Es un tipo de dato exclusivo de TypeScript. Su traducción sería “cualquiera”, pues literalmente nos permite almacenar cualquier tipo de dato en una variable:
+```javascript
+let myDynamicVar: any;
+
+myDynamicVar = 100; // number
+myDynamicVar = null;
+myDynamicVar = {}; // Object
+myDynamicVar = ""; // string
+```
+Se recomienda no usar este tipo de dato, pues se considera mala práctica.
+
+### Importancia del Any
+
+La utilidad de any radica cuando se quiere migrar de a pocos a TypeScript desde JavaScript, ya que incrementalmente definiríamos el tipo de dato donde sea necesario sin romper nuestro programa de golpe.
+
+### Tratar Any como un primitivo
+
+Se pueden realizar conversiones a tipos de datos primitivos de JavaScript:
+```javascript
+//Caso 1
+myDynamicVar = "HOLA";
+const otherString = (myDynamicVar as string).toLowerCase();
+
+//Caso 2
+myDynamicVar = 1212;
+const otherNumber = (<number>myDynamicVar).toFixed();
+```
+Como observamos, podemos tratar nuestra variable any como string en el primer caso y como number en el segundo. Después de esto, podemos acceder a los métodos toLowerCase() y toFixed() según el tipo de dato correspondiente.
+
+## Union Types
+Nos permite definir más de un tipo de dato a una variable, argumento de una función, etc.
+```javascript
+let userId: string | number;
+
+userId = 10;
+userId = "10";
+
+function helloUser(id: string | number){
+    console.log(`Hola usuario con el número de id ${id}`);
+}
+```
+Aquí indicamos que id y userId pueden ser de tipo string o number.
+
+### Una mejor práctica
+
+El tipo de dato any nos brinda la flexibilidad de JavaScript en TypeScript con respecto al tipado. Sin embargo, si deseamos eso, es mejor hacer uso de los Union Types.
+## Alias y tipos literales
 
