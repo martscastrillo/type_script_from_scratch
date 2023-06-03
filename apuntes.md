@@ -442,5 +442,95 @@ Aquí indicamos que id y userId pueden ser de tipo string o number.
 ### Una mejor práctica
 
 El tipo de dato any nos brinda la flexibilidad de JavaScript en TypeScript con respecto al tipado. Sin embargo, si deseamos eso, es mejor hacer uso de los Union Types.
+
 ## Alias y tipos literales
 
+Los Alias nos permiten darle un nombre a uno o varios tipos de datos en conjunto. Un ejemplo de como se definen sería así:
+```javascript
+type UserID = string | boolean | number;
+``` 
+¡Ahora UserID lo podemos usar como si fuese un tipo de dato string, boolean o number!
+```javascript
+let dynamicVar: UserID = "300";
+
+dynamicVar = true;
+dynamicVar = 200;
+```
+Los Union Types que vayamos a utilizar ahora serán menos tediosos de escribir, pues con los Alias podemos utilizar el mismo conjunto de tipos de datos en la definición de varias variables, beneficiándonos en escribir menos código.
+```javascript
+type UserID = string | boolean | number;
+
+let dynamicVar: UserID = "300";
+
+function helloUser( userId: UserID ) {
+    console.log(`Un saludo al usuario con el número de id ${userId}`);
+}
+```
+Nota: la palabra type en los Alias es algo propio de TypeScript.
+
+### Tipos Literales (Literal Types)
+
+Gracias a esto podemos definir explícita y literalmente los posibles valores que puede tomar nuestra variable. Por ejemplo:
+```javascript
+let shirtSize: "S" | "M" | "L" | "XL";
+
+shirtSize = "M"; //CORRECTO
+
+shirtSize = "S"; //CORRECTO
+
+shirtSize = "qwrty"; //ERROR. No está en las opciones.
+
+shirtSize = "SS"; //ERROR. Letra de más.
+
+shirtSize = "m"; //ERROR. Está en minúscula.
+```
+Definimos que la variable shirtSize pueda ser una de las 4 posibles opciones de valores, que estos sean de tipo string y que estén en mayúscula, por tanto, si queremos asignar un valor que no sea exactamente como lo declaramos, TypeScript nos mostrará un error.
+
+### Alias + Tipos Literales
+
+También podríamos combinarlas para facilitar aún más el desarrollo de nuestro programa:
+```javascript
+type Sizes = 'S' | 'M' | 'L' | 'XL';
+
+let shirtSize: Sizes;
+
+shirtSize = "M";
+
+function yourSize( userSize: Sizes ){
+
+    console.log(`Tu medida es ${userSize}`);
+
+}
+```
+## Null y Undefined
+Estos dos funcionan como dos tipos de datos, al igual que, por ejemplo, string o number.
+
+
+El tipo de datonull es para indicar un valor nulo y undefined para algo indefinido. Son tipos diferentes.
+### Null y Undefined como tipo Any
+
+En TypeScript, si no especificamos que va a ser null o undefined, estos son inferidos como tipo any:
+```javascript
+//TypeScript
+
+let myVar = null; //Tipo any
+
+let otherVar = undefined; //Tipo any
+
+let myNull: null = null; // Tipo null
+
+let myUndefined: undefined = undefined; //Tipo undefined
+```
+Union Types como emergencia
+
+Hay casos en la que queremos que una variable sea de tipo string o number y que al inicializarlas sean de tipo null o undefined para luego asignarles un valor del tipo de dato de los primeros mencionados. En este contexto podríamos usar los Union Types:
+```javascript
+let myNumber: number | null = null;
+
+myNumber = 50;
+
+let myString: string | undefined = undefined;
+
+myString = "Hola TypeScript";
+```
+## Funciones 
