@@ -712,6 +712,7 @@ Finalmente, las funciones o variables que queramos utilizar desde otro archivo s
 3. Usamos la palabra reservada from, seguido de, entre comillas dobles o simples, la ruta de la ubicación en la que se encuentra el archivo del cual estamos importando su código.
 
 ##Usando librerías que soportan TypeScript
+
 Las librerías que tienen soporte para TypeScript nos facilitan su uso, y más aún si usas editores de código que se integran bien con este “lenguaje”, pues brindan información muy útil como indicar:
 
 - La cantidad de parámetros esperados por una función
