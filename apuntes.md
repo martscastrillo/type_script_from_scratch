@@ -588,6 +588,134 @@ function otherFunc(title?: string, amount: number){} // ERROR
  ```
 ## Retorno de funciones
 
+En TypeScript podemos especificar el tipo de dato del valor que nos retornará una función o indicar si no se devolverá dato alguno:
 
+### Retornos tipados en TypeScript
 
+El tipo de retorno se especificará después de los paréntesis en los que se encuentran los argumentos de la función:
 
+1. Void: funciones sin retorno
+Este tipo de función ejecuta ciertas instrucciones, pero no devuelve dato alguno. Estas son conocidas como funciones de tipo void. Se definen así:
+```javascript
+//TypeScript
+function imprimirNombre(yourName: string): void {
+    console.log(`Hello ${yourName}`);
+}
+```
+2. Funciones con retorno
+Por el contrario, si en la función devolveremos algún valor, podemos especificar el tipo de dato de este:
+```javascript
+//TypeScript
+function suma(a: number, b: number): number {
+    return a + b;
+}
+
+function holaMundo(): string {
+    return "Hello, World!";
+}
+```
+También los retornos pueden ser más de un tipo de dato:
+```javascript
+//TypeScript
+function devolverMayor(a: number, b: number): number | string {
+    if(a > b){
+        // Retorna un número
+        return a;
+    } else if( b > a ) {
+        // Retorna un número
+        return b;
+    } else {
+        // Retorna un string
+        return `Los números ${a} y ${b} son iguales`;
+    }
+}
+```
+### TypeScript también lo infiere
+Si no indicamos en nuestra declaración de la función el tipado del retorno, TypeScript, al igual que con las variables, lo puede inferir según si retornas datos (sea string, number, etc.) o si nada es devuelto (tipo void).
+
+## Objetos en funciones
+Nuestras funciones pueden recibir objetos como argumentos. En TypeScript también podemos declarar el tipado de estos. Veamos un ejemplo:
+```javascript
+//TypeScript
+function imprimirDatos( data: { username: string, email: string } ): void {
+
+    console.log(`Tu nombre de usuario es ${data.username} y tu email es ${data.email}`)
+    
+}
+
+imprimirDatos({
+      username: 'freddier',
+      email: 'freddy@email.com'
+})
+```
+En el ejemplo, el nombre data hace referencia al objeto que recibirá la función imprimirDatos. Por ello, para acceder al valor de username lo definimos en el console.log como data.username y para el email como data.email, pues así es como se accede a las propiedades de un objeto.
+
+Finalmente, cuando invocamos imprimirDatos y queremos enviar el objeto que nos pide como parámetro, simplemente se colocará entre llaves los atributos del mismo sin colocar un nombre de referencia como data tal como lo hicimos en la definición de la función.
+
+## Objetos como tipos
+En TypeScript también podemos usar los Alias para definir la estructura de tipado que debería tener un objeto:
+```javascript
+//TypeScript
+type userData = {
+    username: string,
+    email: string
+}
+```
+Y luego este “nuevo tipo” puede ser usado en un array, por ejemplo, para definir el tipado de los objetos que queramos añadir:
+```javascript
+//TypeScript
+type userData = {
+    username: string,
+    email: string
+}
+
+let usersList: userData[] = [];
+
+usersList.push({
+    username: "freddier", //CORRECTO
+    email: "freddy@email.com", //CORRECTO
+});
+usersList.push({
+    username: "cvander", //CORRECTO
+    email: true, // ERROR. Debe ser de tipo string y NO de tipo boolean
+});
+```
+## Módulos: import y export
+Nuestro código puede ser dividido en varios módulos (archivos), por lo que para poder usar las funciones o variables que existen en uno y queramos acceder desde otro, utilizamos import y export.
+
+### Export
+```javascript
+/*---->  Archivo: funciones.ts  <----*/
+export function suma(a: number, b: number): number {
+    return a + b;
+}
+
+export function resta(a: number, b: number): number {
+    return a - b;
+}
+
+export let numerosRandom = [1, 30, 40, 50];
+export type Sizes = "S" | "M" | "L" | "XL";
+```
+Como observamos, tenemos un archivo llamado funciones.ts la cual contiene dos funciones: suma y resta. Si estas queremos usarlas desde otro archivo, necesitamos usar la palabra reservada export justo antes de definir nuestra función (lo mismo aplica para las variables). De esta forma indicamos que serán exportados para ser utilizados desde otro archivo JavaScript/TypeScript.
+
+### Import
+```javascript
+/*---> Archivo: programa.ts  <---*/
+
+import {suma, resta, Sizes} from "./funciones.ts";
+```
+Finalmente, las funciones o variables que queramos utilizar desde otro archivo son importadas de la siguiente manera:
+
+1. Usamos la palabra reservada import
+2. Entre llaves indicamos las funciones y/o variables que queremos acceder. Hacemos una separación con comas
+3. Usamos la palabra reservada from, seguido de, entre comillas dobles o simples, la ruta de la ubicación en la que se encuentra el archivo del cual estamos importando su código.
+
+##Usando librerías que soportan TypeScript
+Las librerías que tienen soporte para TypeScript nos facilitan su uso, y más aún si usas editores de código que se integran bien con este “lenguaje”, pues brindan información muy útil como indicar:
+
+- La cantidad de parámetros esperados por una función
+- El tipo de datos de los parámetros y variables
+- El tipo de dato que retornará la función
+- Autocompletado al usar métodos de un módulo
+- Mejores prácticas
